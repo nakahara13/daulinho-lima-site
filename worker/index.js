@@ -21,6 +21,7 @@ async function initialize(db) {
   ]);
 }
 async function getData(env,all=false) {
+  if(!env.DB&&env.READ_ONLY_DEMO)return {settings:DEFAULTS,posts:SEEDS.map(p=>({...p,author:'Daulinho Lima',status:'published',created_at:'2026-11-06T12:00:00.000Z',updated_at:'2026-11-06T12:00:00.000Z'}))};
   await initialize(env.DB);
   const setting=await env.DB.prepare("SELECT value FROM settings WHERE key='school'").first();
   const posts=await env.DB.prepare('SELECT * FROM posts'+(all?'':" WHERE status='published'")+' ORDER BY created_at DESC, id ASC').all();
@@ -80,9 +81,9 @@ async function api(request,env,url) {
     return json({ok:true});
   }
   if(path==='/api/admin/upload'&&method==='POST') {
-    if(Number(request.headers.get('content-length'))>5*1024*1024+10000) return json({error:'A imagem deve ter até 5 MB.'},413);
+    if(Number(request.headers.get('content-length'))>3*1024*1024+10000) return json({error:'A imagem deve ter até 3 MB.'},413);
     const form=await request.formData(),file=form.get('file');
-    if(!file||typeof file.arrayBuffer!=='function'||file.size>5*1024*1024) return json({error:'Escolha uma imagem de até 5 MB.'},400);
+    if(!file||typeof file.arrayBuffer!=='function'||file.size>3*1024*1024) return json({error:'Escolha uma imagem de até 3 MB.'},400);
     const types={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'};
     if(!types[file.type]) return json({error:'Use uma imagem JPG, PNG ou WebP.'},400);
     const buffer=await file.arrayBuffer(),bytes=new Uint8Array(buffer);
@@ -144,7 +145,7 @@ export default {
       else if(path.startsWith('/blog/')) {
         const post=posts.find(p=>p.slug===decodeURIComponent(path.slice(6)));
         if(post) {
-          const comments=await env.DB.prepare("SELECT name,body,created_at FROM comments WHERE post_id=? AND status='approved' ORDER BY created_at DESC").bind(post.id).all();
+          const comments=env.DB?await env.DB.prepare("SELECT name,body,created_at FROM comments WHERE post_id=? AND status='approved' ORDER BY created_at DESC").bind(post.id).all():{results:[]};
           html=articlePage(settings,post,posts,comments.results);
         }
       }

@@ -1,6 +1,9 @@
 dist/
+public/
+.vercel/
 data/
 .env*
+!.env.example
 .dev.vars*
 node_modules/
 outputs/

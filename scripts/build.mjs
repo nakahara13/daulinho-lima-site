@@ -1,4 +1,5 @@
 import {readFile,writeFile,mkdir,copyFile} from 'node:fs/promises';
+import {pathToFileURL} from 'node:url';
 const root=new URL('../',import.meta.url);
 const read=p=>readFile(new URL(p,root),'utf8');
 const [data,views,server,css,client]=await Promise.all(['worker/data.js','worker/views.js','worker/index.js','worker/styles.css','worker/app.js'].map(read));
@@ -8,3 +9,7 @@ await mkdir(new URL('dist/.openai/',root),{recursive:true});
 await writeFile(new URL('dist/server/index.js',root),'const STYLE='+JSON.stringify(css)+';\nconst CLIENT='+JSON.stringify(client)+';\n'+combine(data)+'\n'+combine(views)+'\n'+combine(server));
 await copyFile(new URL('.openai/hosting.json',root),new URL('dist/.openai/hosting.json',root));
 console.log('Build concluído: HTML, CSS, JavaScript e API em um Worker ESM.');
+if(process.argv[1]&&pathToFileURL(process.argv[1]).href===import.meta.url&&(process.env.VERCEL==='1'||process.argv.includes('--vercel'))){
+  const {buildVercel}=await import('./build-vercel.mjs');
+  await buildVercel();
+}

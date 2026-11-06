@@ -80,7 +80,7 @@ if($('#admin-post-list')){
   $('#cover-upload').addEventListener('change',async e=>{
     const file=e.target.files[0];if(!file)return;
     const form=$('#post-form'),button=$('[type="submit"]',form);
-    if(file.size>5*1024*1024){message(form,'A imagem deve ter até 5 MB.',true);return}
+    if(file.size>3*1024*1024){message(form,'A imagem deve ter até 3 MB.',true);return}
     if(!['image/jpeg','image/png','image/webp'].includes(file.type)){message(form,'Use JPG, PNG ou WebP.',true);return}
     uploading=true;button.disabled=true;message(form,'Enviando imagem…');
     try{const body=new FormData();body.append('file',file);const result=await api('/api/admin/upload','POST',body);form.elements.cover.value=result.url;previewCover();message(form,'Imagem enviada. Salve o post para publicar.')}catch(error){message(form,error.message,true)}finally{uploading=false;button.disabled=false}
