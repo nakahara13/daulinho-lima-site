@@ -449,15 +449,36 @@ nav .nav-cta:hover {
   align-items: center;
 }
 
-.marquee > div {
+.marquee-track {
   display: flex;
   align-items: center;
-  gap: 40px;
+  flex-shrink: 0;
+  width: max-content;
   white-space: nowrap;
   font-family: var(--display);
   font-size: 27px;
   letter-spacing: .7px;
-  transform: translateX(-30px);
+  animation: marquee-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-shrink: 0;
+  min-width: 100vw;
+  gap: 40px;
+  padding-right: 40px;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .marquee span {
@@ -1995,9 +2016,13 @@ textarea::placeholder {
     height: 55px;
   }
 
-  .marquee > div {
+  .marquee-track {
     font-size: 23px;
+  }
+
+  .marquee-content {
     gap: 25px;
+    padding-right: 25px;
   }
 
   .marquee span {
