@@ -1,5 +1,4 @@
 {
-  "d1": "DB",
-  "r2": "BUCKET",
-  "project_id": "appgprj_6aee165b2d18819188473a01a89ba0be"
+  "project_id": "appgprj_6aee165b2d18819188473a01a89ba0be",
+  "static": { "directory": "public" }
 }

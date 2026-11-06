@@ -1,1 +1,0 @@
-CREATE TABLE uploads (key TEXT PRIMARY KEY NOT NULL, body BLOB NOT NULL, content_type TEXT NOT NULL);

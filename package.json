@@ -5,13 +5,8 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "start": "node scripts/dev.mjs",
-    "test": "node scripts/test.mjs && node scripts/test-vercel.mjs",
+    "test": "node scripts/test-static.mjs",
     "build": "node scripts/build.mjs",
-    "build:vercel": "node scripts/build.mjs --vercel",
-    "db:setup:vercel": "node --env-file-if-exists=.env.local scripts/setup-vercel-db.mjs",
-    "validate": "node scripts/validate-artifact.mjs"
-  },
-  "dependencies": {
-    "@libsql/client": "^0.18.0"
+    "build:vercel": "node scripts/build.mjs"
   }
 }

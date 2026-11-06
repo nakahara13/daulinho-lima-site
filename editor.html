@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101010">
+<title>Editor do blog — Daulinho Lima</title>
+<meta name="description" content="Prepare publicações em HTML para o Diário Musical.">
+<meta property="og:title" content="Editor do blog — Daulinho Lima">
+<meta property="og:description" content="Prepare publicações em HTML para o Diário Musical.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&amp;fit=crop&amp;w=1800&amp;q=85">
+<meta name="robots" content="noindex,nofollow">
+
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;450;500;600;650;700&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/editor.css">
+<script type="module" src="/assets/site.js"></script>
+<script type="module" src="/assets/editor.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+<header class="site-header"><div class="container nav-row"><a class="wordmark" href="/" aria-label="Daulinho Lima, início"><span class="brand-symbol">𝄞</span><span>Daulinho<span>Lima<i>ESCOLA DE MÚSICA</i></span></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="navigation" aria-label="Abrir menu"><span></span><span></span></button><nav id="navigation" aria-label="Menu principal"><a href="/#escola">A escola</a><a href="/#cursos">Nossos cursos</a><a href="/blog/" >Blog</a><a href="/#contato">Contato</a><a class="button nav-cta" href="/#contato">Vem fazer música <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5"/></svg></a></nav></div></header>
+<main id="main"><section class="container editor-page">
+<span class="eyebrow">DAULINHO LIMA · BASTIDORES</span>
+<h1>Uma nova história.<br><em>Do seu jeito.</em></h1>
+<p class="editor-intro">Escreva, escolha a capa e transforme sua ideia em uma página do blog. Cada publicação é um único arquivo HTML, com o mesmo visual do site.</p>
+<div class="editor-layout">
+<form id="post-form" class="editor-fields">
+<label>Título<input name="title" required maxlength="160" placeholder="Dê um título para sua história"></label>
+<div class="form-grid"><label>Autor<input name="author" required maxlength="80" value="Daulinho Lima" autocomplete="name"></label><label>Categoria<input name="category" required maxlength="50" value="Música" list="categories"><datalist id="categories"><option>Para começar</option><option>Inspiração</option><option>Dicas de estudo</option><option>Na escola</option></datalist></label></div>
+<label>Resumo<textarea name="excerpt" required maxlength="300" rows="3" placeholder="Uma introdução para despertar a curiosidade"></textarea><small>Aparece nos cartões do blog e no início do post.</small></label>
+<div class="form-grid"><label>Data<input name="date" type="date" required></label><label>Endereço do post<input name="slug" required maxlength="100" pattern="[a-z0-9]+(-[a-z0-9]+)*" title="Use letras minúsculas sem acentos, números e hífens." placeholder="o-titulo-da-sua-historia" spellcheck="false"></label></div>
+<p class="editor-path">Arquivo gerado: <code id="post-path">blog/seu-post.html</code></p>
+<label>Imagem de capa por URL<input name="cover" type="url" value="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=1800&q=85" placeholder="https://…" spellcheck="false"><small>Ou escolha uma imagem abaixo para incorporá-la ao próprio HTML.</small></label>
+<label class="editor-upload">Escolher uma imagem do dispositivo<input id="cover-upload" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif"><small>JPG, PNG, WebP, GIF ou AVIF · até 3 MB</small></label>
+<div class="editor-cover"><img id="cover-preview" alt="Prévia da imagem de capa" hidden><p id="cover-note"></p></div>
+<label>Texto do post<textarea name="content" required minlength="20" maxlength="60000" rows="15" placeholder="Conte a sua história.&#10;&#10;## Um subtítulo&#10;&#10;Continue o texto com uma linha em branco entre os parágrafos."></textarea><small>Separe os parágrafos com uma linha em branco. Comece uma linha com ## para criar um subtítulo. O restante é texto simples.</small></label>
+<p class="editor-hint" id="reading-time">1 min de leitura</p>
+<div class="editor-actions"><button class="button outline" type="submit">Ver prévia <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5"/></svg></button><button class="button dark" type="button" id="download-post">Baixar HTML <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
+<p class="form-message" id="editor-status" role="status" aria-live="polite"></p>
+</form>
+<aside class="editor-sidebar"><h2>Da ideia<br>para o <em>blog.</em></h2><p>Este endereço fica fora dos menus do site. Use-o para preparar as publicações da escola.</p><ol class="steps"><li>Preencha o post e confira a prévia.</li><li>Baixe o HTML e coloque na pasta <strong>blog/</strong> do projeto, ou publique direto no GitHub abaixo.</li><li>Após o envio ao repositório conectado, a Vercel atualiza o site e a lista de posts.</li></ol><label class="editor-import">Continuar um post já criado<input id="import-post" type="file" accept=".html,text/html"><span>Abra o HTML baixado por este editor para editar o texto e a capa.</span></label></aside>
+</div>
+<details class="publish-options"><summary>Publicar diretamente no GitHub</summary><p>Envie apenas o HTML do post para o repositório conectado à Vercel. O token é usado nesta sessão e enviado somente à API do GitHub; ele não entra no arquivo gerado.</p><form id="publish-form" autocomplete="off"><div class="form-grid"><label>Repositório<input id="github-repository" required value="nakahara13/daulinho-lima-site" placeholder="usuario/repositorio" spellcheck="false" pattern="[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+"></label><label>Branch<input id="github-branch" required value="main" spellcheck="false" maxlength="200"></label></div><label>Token de acesso do GitHub<input id="github-token" type="password" required autocomplete="off" placeholder="Cole seu token aqui" spellcheck="false"></label><p class="editor-help">Use um token com acesso a este repositório e a permissão <strong>Contents: Read and write</strong>. <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">Criar token no GitHub ↗</a></p><button class="button dark" id="publish-button" type="submit">Publicar no GitHub ↗</button><p class="form-message" id="publish-status" role="status" aria-live="polite"></p></form></details>
+<section class="editor-preview" id="editor-preview" hidden aria-label="Prévia do post"><div class="editor-preview-heading"><h2>Antes de <em>compartilhar.</em></h2><button type="button" id="close-preview">Fechar prévia ×</button></div><iframe id="post-preview" title="Prévia da publicação" sandbox="" referrerpolicy="no-referrer"></iframe></section>
+</section></main>
+<footer><div class="container footer-main"><a class="wordmark" href="/" aria-label="Daulinho Lima, início"><span class="brand-symbol">𝄞</span><span>Daulinho<span>Lima<i>ESCOLA DE MÚSICA</i></span></span></a><p>Mais música na sua vida.<br>Mais você no mundo.</p><div><a href="/#escola">A escola</a><a href="/#cursos">Cursos</a><a href="/blog/">Blog</a><a href="/#contato">Contato</a></div><a class="back-top" href="#main" aria-label="Voltar ao topo">↑</a></div><div class="container footer-bottom"><span>© 2026 Daulinho Lima. Feito para quem sente a música.</span></div></footer>
+<button class="whatsapp-float" data-contact aria-label="Conversar pelo WhatsApp"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3A12.9 12.9 0 0 0 4.8 22.4L3 29l6.8-1.8A13 13 0 1 0 16 3Zm0 23.6a10.5 10.5 0 0 1-5.4-1.5l-.4-.2-4 .9 1.1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6Zm5.9-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.6-.5-.8-.5h-.7c-.2 0-.6.1-.8.4-.3.3-1.1 1-1.1 2.6s1.2 3 1.4 3.2c.1.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4Z"/></svg><span>Vamos conversar?</span></button>
+<dialog id="contact-dialog"><button class="dialog-close" data-close aria-label="Fechar">×</button><span class="eyebrow">VAMOS FAZER MÚSICA?</span><h2>Seu primeiro passo<br>começa aqui.</h2><p data-contact-description>Converse com a escola e encontre o melhor horário para você.</p><a class="button dark" href="/#contato" data-contact-link data-close>Ver informações de contato <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5"/></svg></a></dialog>
+<div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

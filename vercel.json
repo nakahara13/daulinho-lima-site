@@ -1,15 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "npm run build:vercel",
+  "buildCommand": "npm run build",
   "outputDirectory": "public",
-  "functions": {
-    "api/site.js": {
-      "includeFiles": "dist/server/**",
-      "maxDuration": 30
-    }
-  },
-  "rewrites": [
-    { "source": "/:path*", "destination": "/api/site?__route=:path*" }
+  "headers": [
+    { "source": "/editor.html", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
   ]
 }
